@@ -1,276 +1,153 @@
-/**
- * Reading Features
- * ميزات القراءة المتقدمة: شريط التقدم، جدول المحتويات، وقت القراءة
- */
+/* ═══════════════════════════════════════
+   Reading Features — ميزات القراءة
+   Progress Bar + TOC + Scroll Spy +
+   Reading Time + Font Size Control
+   ═══════════════════════════════════════ */
 
 (function() {
   'use strict';
 
-  // متوسط سرعة القراءة (200 كلمة في الدقيقة للعربية)
-  const WORDS_PER_MINUTE = 200;
+  // ── Reading Progress Bar ──
+  function initProgressBar() {
+    var progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
 
-  // ===== READING PROGRESS BAR =====
-  const ReadingProgress = {
-    element: null,
-    bar: null,
+    window.addEventListener('scroll', function() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = Math.min(progress, 100) + '%';
+    });
+  }
 
-    init() {
-      // إنشاء عنصر شريط التقدم
-      this.element = document.createElement('div');
-      this.element.className = 'reading-progress';
-      this.element.innerHTML = '<div class="reading-progress__bar"></div>';
-      
-      // إضافته بعد الـ navbar
-      const navbar = document.querySelector('.navbar');
-      if (navbar) {
-        navbar.parentNode.insertBefore(this.element, navbar.nextSibling);
-        this.bar = this.element.querySelector('.reading-progress__bar');
-        this.bindEvents();
-      }
-    },
+  // ── Estimated Reading Time ──
+  function calculateReadingTime() {
+    var articleBody = document.querySelector('.article-body');
+    if (!articleBody) return;
 
-    bindEvents() {
-      window.addEventListener('scroll', () => this.update(), { passive: true });
-      window.addEventListener('resize', () => this.update(), { passive: true });
-    },
+    var text = articleBody.textContent || articleBody.innerText;
+    var wordCount = text.trim().split(/\s+/).length;
+    var readingTime = Math.ceil(wordCount / 200); // 200 words/min for Arabic
 
-    update() {
-      if (!this.bar) return;
-
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight - windowHeight;
-      const scrollTop = window.scrollY;
-      
-      if (documentHeight <= 0) {
-        this.bar.style.width = '100%';
-        return;
-      }
-
-      const progress = (scrollTop / documentHeight) * 100;
-      this.bar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+    var readingTimeElements = document.querySelectorAll('.reading-time-value');
+    for (var i = 0; i < readingTimeElements.length; i++) {
+      readingTimeElements[i].textContent = readingTime + ' دقائق';
     }
-  };
+  }
 
-  // ===== READING TIME CALCULATOR =====
-  const ReadingTime = {
-    calculate(text) {
-      // إزالة HTML tags
-      const cleanText = text.replace(/<[^>]*>/g, '');
-      const wordCount = cleanText.trim().split(/\s+/).length;
-      const minutes = Math.ceil(wordCount / WORDS_PER_MINUTE);
-      return minutes;
-    },
+  // ── Auto-Generated TOC ──
+  function generateTOC() {
+    var articleBody = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    var tocMobileList = document.getElementById('toc-mobile-list');
+    if (!articleBody || (!tocList && !tocMobileList)) return;
 
-    display(element, minutes) {
-      if (element) {
-        element.textContent = `${minutes} دقيقة للقراءة`;
-        element.setAttribute('datetime', `PT${minutes}M`);
-      }
-    },
+    var headings = articleBody.querySelectorAll('h2, h3');
+    var tocHTML = '';
 
-    init() {
-      const timeElement = document.querySelector('[data-reading-time]');
-      const contentElement = document.querySelector('.article-content');
-      
-      if (timeElement && contentElement) {
-        const text = contentElement.innerHTML;
-        const minutes = this.calculate(text);
-        this.display(timeElement, minutes);
-      }
+    for (var i = 0; i < headings.length; i++) {
+      var heading = headings[i];
+      var id = 'heading-' + i;
+      heading.setAttribute('id', id);
+
+      var level = heading.tagName.toLowerCase();
+      var cssClass = level === 'h3' ? 'toc__link toc__link--h3' : 'toc__link';
+
+      tocHTML += '<li><a href="#' + id + '" class="' + cssClass + '" data-target="' + id + '">' + heading.textContent + '</a></li>';
     }
-  };
 
-  // ===== TABLE OF CONTENTS =====
-  const TableOfContents = {
-    container: null,
-    headings: null,
+    if (tocList) tocList.innerHTML = tocHTML;
+    if (tocMobileList) tocMobileList.innerHTML = tocHTML;
+  }
 
-    init() {
-      const content = document.querySelector('.article-content');
-      if (!content) return;
+  // ── Scroll Spy ──
+  function initScrollSpy() {
+    var tocLinks = document.querySelectorAll('.toc__link');
+    if (tocLinks.length === 0) return;
 
-      // البحث عن عناوين H2 و H3
-      this.headings = content.querySelectorAll('h2, h3');
-      
-      if (this.headings.length === 0) return;
+    var headings = [];
+    for (var i = 0; i < tocLinks.length; i++) {
+      var targetId = tocLinks[i].getAttribute('data-target');
+      var targetEl = document.getElementById(targetId);
+      if (targetEl) headings.push({ el: targetEl, link: tocLinks[i] });
+    }
 
-      // إضافة IDs للعناوين إذا لم تكن موجودة
-      this.headings.forEach((heading, index) => {
-        if (!heading.id) {
-          heading.id = `heading-${index}`;
-        }
-      });
+    function updateActiveLink() {
+      var scrollPos = window.scrollY + 120;
+      var activeIndex = -1;
 
-      // إنشاء الـ TOC
-      this.createTOC();
-    },
-
-    createTOC() {
-      // البحث عن حاوية الـ TOC
-      const tocContainer = document.querySelector('.toc');
-      const tocMobileContainer = document.querySelector('.toc-mobile .toc__list');
-      
-      if (!tocContainer && !tocMobileContainer) return;
-
-      const list = document.createElement('ul');
-      list.className = 'toc__list';
-
-      this.headings.forEach((heading, index) => {
-        const id = heading.id;
-        const text = heading.textContent;
-        const level = heading.tagName.toLowerCase();
-
-        const item = document.createElement('li');
-        item.className = 'toc__item';
-
-        const link = document.createElement('a');
-        link.href = `#${id}`;
-        link.className = 'toc__link';
-        if (level === 'h3') {
-          link.classList.add('toc__link--h3');
-        }
-        link.textContent = text;
-        link.setAttribute('data-target', id);
-
-        // إضافة smooth scroll
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = document.getElementById(id);
-          if (target) {
-            const headerOffset = 100;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-          }
-        });
-
-        item.appendChild(link);
-        list.appendChild(item);
-      });
-
-      // إضافة الـ TOC للحاويات
-      if (tocContainer) {
-        const tocList = tocContainer.querySelector('.toc__list');
-        if (tocList) {
-          tocList.innerHTML = '';
-          tocList.appendChild(list.cloneNode(true));
+      for (var i = 0; i < headings.length; i++) {
+        if (headings[i].el.offsetTop <= scrollPos) {
+          activeIndex = i;
         }
       }
 
-      if (tocMobileContainer) {
-        tocMobileContainer.innerHTML = '';
-        tocMobileContainer.appendChild(list);
-
-        // تفعيل زر التوسيع
-        const toggle = document.querySelector('.toc-mobile__toggle');
-        const content = document.querySelector('.toc-mobile__content');
-        
-        if (toggle && content) {
-          toggle.addEventListener('click', () => {
-            content.classList.toggle('active');
-            const isActive = content.classList.contains('active');
-            toggle.setAttribute('aria-expanded', isActive);
-          });
-        }
+      for (var j = 0; j < headings.length; j++) {
+        headings[j].link.classList.remove('active');
       }
 
-      // تفعيل Scroll Spy
-      this.initScrollSpy();
-    },
-
-    initScrollSpy() {
-      if (!this.headings) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              this.setActive(entry.target.id);
-            }
-          });
-        },
-        {
-          rootMargin: '-100px 0px -80% 0px',
-          threshold: 0
-        }
-      );
-
-      this.headings.forEach(heading => {
-        observer.observe(heading);
-      });
-    },
-
-    setActive(id) {
-      // إزالة الـ active من جميع الروابط
-      document.querySelectorAll('.toc__link').forEach(link => {
-        link.classList.remove('toc__link--active');
-      });
-
-      // إضافة الـ active للرابط الحالي
-      const activeLink = document.querySelector(`.toc__link[data-target="${id}"]`);
-      if (activeLink) {
-        activeLink.classList.add('toc__link--active');
+      if (activeIndex >= 0) {
+        headings[activeIndex].link.classList.add('active');
       }
     }
-  };
 
-  // ===== BACK TO TOP BUTTON =====
-  const BackToTop = {
-    button: null,
-    threshold: 300,
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink();
+  }
 
-    init() {
-      this.button = document.createElement('button');
-      this.button.className = 'back-to-top';
-      this.button.setAttribute('aria-label', 'العودة لأعلى');
-      this.button.innerHTML = `
-        <svg class="icon" viewBox="0 0 24 24">
-          <polyline points="18,15 12,9 6,15"/>
-        </svg>
-      `;
-      
-      document.body.appendChild(this.button);
-      
-      this.button.addEventListener('click', () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+  // ── Font Size Control ──
+  function initFontSizeControl() {
+    var STORAGE_KEY = 'font-size-preference';
+    var buttons = document.querySelectorAll('.font-size-btn');
+    if (buttons.length === 0) return;
+
+    var sizes = {
+      'small': '1rem',
+      'medium': '1.125rem',
+      'large': '1.3rem'
+    };
+
+    var saved = localStorage.getItem(STORAGE_KEY) || 'medium';
+    applyFontSize(saved);
+
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function() {
+        var size = this.getAttribute('data-size');
+        applyFontSize(size);
+        localStorage.setItem(STORAGE_KEY, size);
       });
+    }
 
-      window.addEventListener('scroll', () => this.toggle(), { passive: true });
-    },
-
-    toggle() {
-      if (window.scrollY > this.threshold) {
-        this.button.classList.add('visible');
-      } else {
-        this.button.classList.remove('visible');
+    function applyFontSize(size) {
+      document.documentElement.style.setProperty('--article-font-size', sizes[size] || sizes['medium']);
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+        if (buttons[i].getAttribute('data-size') === size) {
+          buttons[i].classList.add('active');
+        }
       }
     }
-  };
+  }
 
-  // ===== INITIALIZATION =====
+  // ── Mobile TOC Toggle ──
+  function initMobileTOC() {
+    var toggle = document.getElementById('toc-mobile-toggle');
+    var content = document.getElementById('toc-mobile-content');
+    if (!toggle || !content) return;
+
+    toggle.addEventListener('click', function() {
+      toggle.classList.toggle('active');
+      content.classList.toggle('active');
+    });
+  }
+
+  // ── Initialize all reading features ──
   document.addEventListener('DOMContentLoaded', function() {
-    // تهيئة جميع الميزات
-    if (document.querySelector('.article-content')) {
-      ReadingProgress.init();
-      ReadingTime.init();
-      TableOfContents.init();
-      BackToTop.init();
-    }
+    initProgressBar();
+    calculateReadingTime();
+    generateTOC();
+    initScrollSpy();
+    initFontSizeControl();
+    initMobileTOC();
   });
-
-  // تصدير للاختبار
-  window.ReadingFeatures = {
-    progress: ReadingProgress,
-    time: ReadingTime,
-    toc: TableOfContents,
-    backToTop: BackToTop
-  };
-
 })();

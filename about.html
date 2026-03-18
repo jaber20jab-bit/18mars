@@ -3,185 +3,168 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="من أنا - مدونة شخصية">
-  <meta name="author" content="الكاتب">
-  <title>من أنا - مدونتي</title>
-  
-  <!-- Google Fonts - IBM Plex Arabic -->
+  <title>عن الكاتب — مدوّنة ١٨٨٨</title>
+  <meta name="description" content="تعرّف على الكاتب وراء مدوّنة ١٨٨٨. قارئ شغوف ومدوّن يشارك أفكاره ومذكراته.">
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- CSS Files -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/dark-mode.css">
-  
-  <!-- Theme JS (in head to prevent flash) -->
+
+  <!-- Theme JS -->
   <script src="js/theme.js"></script>
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="navbar__container">
-      <a href="index.html" class="navbar__logo">مدونتي</a>
-      
-      <nav class="navbar__nav">
-        <ul class="navbar__links">
-          <li><a href="index.html" class="navbar__link">الرئيسية</a></li>
-          <li><a href="archive.html" class="navbar__link">المقالات</a></li>
-          <li><a href="about.html" class="navbar__link navbar__link--active">من أنا</a></li>
-        </ul>
-        
-        <div class="navbar__actions">
-          <button class="btn btn--icon btn--ghost" data-theme-toggle aria-label="تبديل الثيم">
-            <svg class="icon" viewBox="0 0 24 24">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-          </button>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">١٨٨٨</a>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div class="navbar__links">
+          <a href="index.html" class="navbar__link">الرئيسية</a>
+          <a href="archive.html" class="navbar__link">الأرشيف</a>
+          <a href="about.html" class="navbar__link active">عن الكاتب</a>
         </div>
-      </nav>
-      
-      <button class="navbar__toggle" aria-label="فتح القائمة" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+        <button class="theme-toggle" id="theme-toggle" aria-label="تبديل الوضع">
+          <span class="icon-moon">🌙</span>
+          <span class="icon-sun">☀️</span>
+        </button>
+        <a href="archive.html" class="btn-subscribe">تصفّح الأرشيف</a>
+        <button class="hamburger" id="hamburger" aria-label="القائمة">
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" class="mobile-menu__link">الرئيسية</a>
+    <a href="archive.html" class="mobile-menu__link">الأرشيف</a>
+    <a href="about.html" class="mobile-menu__link">عن الكاتب</a>
+    <div class="mobile-menu__actions">
+      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="تبديل الوضع">
+        <span class="icon-moon">🌙 الوضع الليلي</span>
+        <span class="icon-sun">☀️ الوضع الفاتح</span>
       </button>
     </div>
-  </header>
+  </div>
 
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
-      <h1 class="page-header__title">من أنا</h1>
-      <p class="page-header__subtitle">مبرمج ومطور ويب شغوف بتعلم الأشياء الجديدة ومشاركتها</p>
+  <div class="navbar-spacer"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container" style="position: relative; z-index: 1;">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" alt="صورة الكاتب" class="about-avatar">
+      <h1 class="hero__tagline">عن الكاتب</h1>
     </div>
   </section>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <section class="section">
-      <div class="container">
-        <div class="content-wrapper" style="max-width: 700px;">
-          <!-- About Card -->
-          <div class="card" style="padding: var(--spacing-8); margin-bottom: var(--spacing-8);">
-            <div style="text-align: center; margin-bottom: var(--spacing-6);">
-              <div style="width: 120px; height: 120px; margin: 0 auto var(--spacing-4); background-color: var(--bg-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <svg class="icon" style="width: 60px; height: 60px; color: var(--text-muted);" viewBox="0 0 24 24">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
-                </svg>
-              </div>
-              <h2 style="margin-bottom: var(--spacing-2);">الكاتب</h2>
-              <p style="color: var(--text-secondary);">مبرمج ومطور ويب</p>
-            </div>
-            
-            <div style="color: var(--text-secondary); line-height: var(--line-height-loose);">
-              <p>
-                مرحباً! أنا مبرمج ومطور ويب شغوف بتعلم الأشياء الجديدة ومشاركتها مع الآخرين.
-                بدأت رحلتي في البرمجة منذ عدة سنوات، ومنذ ذلك الحين وأنا أستمتع كل لحظة في هذا المجال الرائع.
-              </p>
-              <p>
-                أؤمن بأن المعرفة يجب أن تُشارك، لذلك أنشئت هذه المدونة لأشارككم خبرتي وتجاربي
-                في عالم البرمجة والتقنية. أكتب عن كل ما يهمني ويهمكم: من البرمجة إلى تطوير الذات،
-                ومن القراءة إلى الحياة بشكل عام.
-              </p>
-              <p>
-                إذا كانت لديك أي أسئلة أو تريد التواصل معي، فلا تتردد في ذلك.
-                أحب التعرف على أشخاص جدد وتبادل الخبرات.
-              </p>
-            </div>
-          </div>
+  <!-- About Content -->
+  <main class="section">
+    <div class="container">
+      <div class="about-content">
+        <h2 style="margin-bottom: var(--space-lg);">أهلاً، أنا أحمد 👋</h2>
+        <p style="font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); color: var(--text-primary);">
+          كاتب ومدوّن عربي، مهتمّ بالأدب والفلسفة وتاريخ الأفكار. أؤمن بأن الكتابة هي أصدق طرق التفكير، وأن المذكرات الشخصية هي مرآة لروح العصر الذي نعيش فيه.
+        </p>
 
-          <!-- Stats -->
-          <div class="grid grid--cols-3" style="margin-bottom: var(--spacing-8);">
-            <div class="card stats-card">
-              <div class="stats-card__number">12</div>
-              <div class="stats-card__label">مقال</div>
-            </div>
-            <div class="card stats-card">
-              <div class="stats-card__number">5</div>
-              <div class="stats-card__label">تصنيف</div>
-            </div>
-            <div class="card stats-card">
-              <div class="stats-card__number">3</div>
-              <div class="stats-card__label">أشهر</div>
-            </div>
-          </div>
+        <h3 style="margin-top: var(--space-2xl); margin-bottom: var(--space-md);">قصتي مع الكتابة</h3>
+        <p style="font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); color: var(--text-primary);">
+          بدأت الكتابة في سنٍّ مبكرة، حين اكتشفت أن الكلمات يمكن أن تكون ملاذاً من ضجيج العالم الخارجي. كان دفتر مذكراتي الأول هو أوّل مساحة حقيقية لي — مكان أستطيع فيه التفكير بحرية دون خوف من الحكم.
+        </p>
+        <p style="font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); color: var(--text-primary);">
+          مع مرور السنين، تطوّرت كتابتي من مذكرات شخصية بحتة إلى مقالات تحاول أن تربط بين التجربة الذاتية والأسئلة الكبرى. أكتب عن القراءة والكتب لأنها شكّلتني. أكتب عن المدن والأمكنة لأنها تحمل ذاكرتنا الجماعية. وأكتب عن الحياة اليومية لأن فيها من العمق ما يفوق أي رواية.
+        </p>
 
-          <!-- Interests -->
-          <div class="card" style="padding: var(--spacing-6);">
-            <h3 style="margin-bottom: var(--spacing-4);">اهتماماتي</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-2);">
-              <span class="tag">البرمجة</span>
-              <span class="tag">تطوير الويب</span>
-              <span class="tag">القراءة</span>
-              <span class="tag">الذكاء الاصطناعي</span>
-              <span class="tag">تطوير الذات</span>
-              <span class="tag">التقنية</span>
-            </div>
-          </div>
+        <h3 style="margin-top: var(--space-2xl); margin-bottom: var(--space-md);">لماذا "١٨٨٨"؟</h3>
+        <p style="font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); color: var(--text-primary);">
+          ١٨٨٨ ليس مجرد اسم — إنه إشارة إلى زمنٍ كانت فيه الكتابة والقراءة من أرقى الفنون. إشارة إلى الصحف الأدبية الأولى والمجلات الفكرية التي شكّلت النهضة العربية. أحاول في هذه المدوّنة أن أستعيد شيئاً من ذلك الروح: البطء، والعمق، والجمال.
+        </p>
 
-          <!-- Contact -->
-          <div class="card" style="padding: var(--spacing-6); margin-top: var(--spacing-6);">
-            <h3 style="margin-bottom: var(--spacing-4);">تواصل معي</h3>
-            <p style="color: var(--text-secondary); margin-bottom: var(--spacing-4);">
-              يمكنك التواصل معي عبر وسائل التواصل الاجتماعي أو البريد الإلكتروني.
-            </p>
-            <div style="display: flex; gap: var(--spacing-3);">
-              <a href="#" class="btn btn--secondary">
-                <svg class="icon icon--sm" viewBox="0 0 24 24">
-                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-                </svg>
-                Twitter
-              </a>
-              <a href="#" class="btn btn--secondary">
-                <svg class="icon icon--sm" viewBox="0 0 24 24">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                </svg>
-                GitHub
-              </a>
-              <a href="#" class="btn btn--secondary">
-                <svg class="icon icon--sm" viewBox="0 0 24 24">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                  <rect x="2" y="9" width="4" height="12"/>
-                  <circle cx="4" cy="4" r="2"/>
-                </svg>
-                LinkedIn
-              </a>
-            </div>
-          </div>
+        <h3 style="margin-top: var(--space-2xl); margin-bottom: var(--space-md);">ما ستجده هنا</h3>
+        <ul style="font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); color: var(--text-primary); list-style: disc; padding-right: var(--space-xl);">
+          <li style="margin-bottom: var(--space-sm);"><strong style="color: var(--text-heading);">مقالات</strong> — تأملات في الأدب والثقافة والحياة</li>
+          <li style="margin-bottom: var(--space-sm);"><strong style="color: var(--text-heading);">مذكرات</strong> — لحظات شخصية ومشاهدات يومية</li>
+          <li style="margin-bottom: var(--space-sm);"><strong style="color: var(--text-heading);">مراجعات</strong> — قراءات في الكتب التي أثّرت فيّ</li>
+          <li style="margin-bottom: var(--space-sm);"><strong style="color: var(--text-heading);">تجارب</strong> — تجارب عملية في الكتابة والإنتاجية والحياة الرقمية</li>
+        </ul>
+
+        <h3 style="margin-top: var(--space-2xl); margin-bottom: var(--space-md);">تواصل معي</h3>
+        <p style="font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); color: var(--text-primary);">
+          أحب سماع آراء القرّاء وأفكارهم. يمكنك التواصل معي عبر:
+        </p>
+        <div style="display: flex; gap: var(--space-md); margin-top: var(--space-md); flex-wrap: wrap;">
+          <a href="#" class="btn btn--outline">تويتر</a>
+          <a href="#" class="btn btn--outline">إنستغرام</a>
+          <a href="mailto:hello@1888blog.com" class="btn btn--primary">أرسل بريداً</a>
         </div>
       </div>
-    </section>
+    </div>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer__bottom">
-        <p class="footer__copyright">
-          © <span data-current-year>2024</span> مدونتي. جميع الحقوق محفوظة.
-        </p>
-        <div class="footer__social">
-          <a href="#" class="footer__social-link" aria-label="Twitter">
-            <svg class="icon icon--sm" viewBox="0 0 24 24">
-              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-            </svg>
-          </a>
-          <a href="#" class="footer__social-link" aria-label="GitHub">
-            <svg class="icon icon--sm" viewBox="0 0 24 24">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-            </svg>
-          </a>
+      <div class="footer__inner">
+        <div class="footer__top">
+          <div class="footer__brand">
+            <a href="index.html" class="footer__logo">١٨٨٨</a>
+            <p class="footer__description">مدوّنة شخصية بسيطة وأنيقة، صُمّمت بعناية لتجربة قراءة مريحة وممتعة.</p>
+          </div>
+          <div class="footer__columns">
+            <div>
+              <h4 class="footer__column-title">الصفحات</h4>
+              <div class="footer__column-links">
+                <a href="index.html" class="footer__column-link">الرئيسية</a>
+                <a href="archive.html" class="footer__column-link">الأرشيف</a>
+                <a href="about.html" class="footer__column-link">عن الكاتب</a>
+              </div>
+            </div>
+            <div>
+              <h4 class="footer__column-title">روابط</h4>
+              <div class="footer__column-links">
+                <a href="#" class="footer__column-link">تويتر</a>
+                <a href="#" class="footer__column-link">إنستغرام</a>
+                <a href="#" class="footer__column-link">RSS</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p class="footer__copyright">© ٢٠٢٦ مدوّنة ١٨٨٨ — جميع الحقوق محفوظة</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social-link" aria-label="تويتر">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="RSS">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- JavaScript Files -->
+  <!-- Back to Top -->
+  <button class="back-to-top" id="back-to-top" aria-label="العودة لأعلى">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- JS -->
   <script src="js/reading.js"></script>
   <script src="js/app.js"></script>
 </body>

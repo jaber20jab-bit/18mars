@@ -3,306 +3,293 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="مدونة شخصية لمقالات ومذكرات في البرمجة والقراءة وتطوير الذات">
-  <meta name="author" content="الكاتب">
-  <title>مدونتي - مقالات ومذكرات</title>
-  
-  <!-- Google Fonts - IBM Plex Arabic -->
+  <title>مدوّنة ١٨٨٨ — أفكار، قصص، ومذكرات</title>
+  <meta name="description" content="مدوّنة شخصية للمقالات والمذكرات. أفكار، قصص، وتأملات في الحياة والأدب والثقافة.">
+
+  <!-- Google Fonts: IBM Plex Sans Arabic -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- CSS Files -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS (order matters) -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/dark-mode.css">
-  
+
   <!-- Theme JS (in head to prevent flash) -->
   <script src="js/theme.js"></script>
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="navbar__container">
-      <a href="index.html" class="navbar__logo">مدونتي</a>
-      
-      <nav class="navbar__nav">
-        <ul class="navbar__links">
-          <li><a href="index.html" class="navbar__link navbar__link--active">الرئيسية</a></li>
-          <li><a href="archive.html" class="navbar__link">المقالات</a></li>
-          <li><a href="about.html" class="navbar__link">من أنا</a></li>
-        </ul>
-        
-        <div class="navbar__actions">
-          <button class="btn btn--icon btn--ghost" data-theme-toggle aria-label="تبديل الثيم">
-            <svg class="icon" viewBox="0 0 24 24">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-          </button>
+
+  <!-- ════════ Reading Progress Bar ════════ -->
+  <div class="reading-progress" id="reading-progress"></div>
+
+  <!-- ════════ Navigation Bar ════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">١٨٨٨</a>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div class="navbar__links">
+          <a href="index.html" class="navbar__link active">الرئيسية</a>
+          <a href="archive.html" class="navbar__link">الأرشيف</a>
+          <a href="about.html" class="navbar__link">عن الكاتب</a>
         </div>
-      </nav>
-      
-      <button class="navbar__toggle" aria-label="فتح القائمة" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+
+        <button class="theme-toggle" id="theme-toggle" aria-label="تبديل الوضع">
+          <span class="icon-moon">🌙</span>
+          <span class="icon-sun">☀️</span>
+        </button>
+
+        <a href="archive.html" class="btn-subscribe">تصفّح الأرشيف</a>
+
+        <button class="hamburger" id="hamburger" aria-label="القائمة">
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ Mobile Menu ════════ -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" class="mobile-menu__link">الرئيسية</a>
+    <a href="archive.html" class="mobile-menu__link">الأرشيف</a>
+    <a href="about.html" class="mobile-menu__link">عن الكاتب</a>
+    <div class="mobile-menu__actions">
+      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="تبديل الوضع">
+        <span class="icon-moon">🌙 الوضع الليلي</span>
+        <span class="icon-sun">☀️ الوضع الفاتح</span>
       </button>
     </div>
-  </header>
+  </div>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero__decoration"></div>
-      <div class="container">
-        <div class="two-col">
-          <div class="hero__content">
-            <h1 class="hero__title">
-              مرحباً بك في <span class="hero__title--gradient">مدونتي</span>
-            </h1>
-            <p class="hero__subtitle">
-              هنا أكتب أفكاري ومذكراتي حول البرمجة والقراءة وتطوير الذات. 
-              شاركني رحلتك في عالم التقنية والمعرفة.
-            </p>
-            <div class="hero__actions">
-              <a href="#latest-articles" class="btn btn--primary btn--lg">ابدأ القراءة</a>
-              <a href="about.html" class="btn btn--secondary btn--lg">من أنا</a>
-            </div>
-          </div>
-        </div>
+  <!-- Navbar Spacer -->
+  <div class="navbar-spacer"></div>
+
+  <!-- ════════ Hero Section ════════ -->
+  <section class="hero">
+    <div class="container" style="position: relative; z-index: 1;">
+      <div style="width: 100px; height: 100px; margin: 0 auto var(--space-lg); background: var(--accent-light); border-radius: var(--radius-circle); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">
+        ✍️
       </div>
-    </section>
+      <h1 class="hero__tagline">أفكار، قصص، ومذكرات.</h1>
+    </div>
+  </section>
 
-    <!-- Stats Section -->
-    <section class="section" style="padding-top: 0;">
+  <!-- ════════ Main Content ════════ -->
+  <main>
+    <!-- Featured Article -->
+    <section class="section">
       <div class="container">
-        <div class="grid grid--cols-3" style="max-width: 800px; margin: 0 auto;">
-          <div class="card stats-card">
-            <div class="stats-card__number">12</div>
-            <div class="stats-card__label">مقال</div>
+        <p class="section-label">المقال المميّز</p>
+        <hr class="divider" style="margin-top: 0; margin-bottom: var(--space-xl);">
+
+        <a href="article.html" class="featured-article animate-on-scroll">
+          <div class="featured-article__image-wrapper">
+            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200&h=600&fit=crop" alt="مكتبة قديمة" class="featured-article__image">
           </div>
-          <div class="card stats-card">
-            <div class="stats-card__number">5</div>
-            <div class="stats-card__label">تصنيف</div>
+          <h2 class="featured-article__title">في مديح القراءة البطيئة: كيف نستعيد متعة التأمل في عصر السرعة</h2>
+          <div class="featured-article__meta">
+            <span class="author-name">أحمد الكاتب</span>
+            <span class="article-card__meta-separator">/</span>
+            <span class="article-date">١٥ مارس ٢٠٢٦</span>
           </div>
-          <div class="card stats-card">
-            <div class="stats-card__number">3</div>
-            <div class="stats-card__label">أشهر</div>
-          </div>
-        </div>
+          <p class="featured-article__excerpt">
+            في عالمٍ يحتفي بالسرعة والإنجاز، تبدو القراءة البطيئة وكأنها فعل تمرّد هادئ. نستكشف في هذا المقال كيف يمكن للتأني في القراءة أن يُعيد تشكيل علاقتنا بالمعرفة والذات.
+          </p>
+          <span class="tag">تأملات</span>
+        </a>
       </div>
     </section>
 
     <!-- Latest Articles -->
-    <section class="section" id="latest-articles">
+    <section class="section" style="background: var(--bg-secondary); transition: background-color var(--transition-normal);">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-header__title">أحدث المقالات</h2>
-          <p class="section-header__subtitle">استكشف أحدث المقالات والمذكرات</p>
+        <p class="section-label">أحدث المقالات</p>
+        <hr class="divider" style="margin-top: 0; margin-bottom: var(--space-xl);">
+
+        <div class="articles-grid">
+          <!-- Article 1 -->
+          <a href="article.html" class="article-card animate-on-scroll" data-word-count="1200">
+            <div class="article-card__thumbnail">
+              <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=300&h=300&fit=crop" alt="كتابة">
+            </div>
+            <div class="article-card__content">
+              <h3 class="article-card__title">ذاكرة المدن: رحلة بين شوارع لم تعد موجودة</h3>
+              <div class="article-card__meta">
+                <span class="author-name">أحمد الكاتب</span>
+                <span class="article-card__meta-separator">/</span>
+                <span class="article-date">١٠ مارس ٢٠٢٦</span>
+                <span class="article-card__meta-separator">/</span>
+                <span class="reading-time-badge">
+                  <span class="card-reading-time">٦ دقائق</span>
+                </span>
+              </div>
+              <p class="article-card__excerpt">
+                تحمل المدن ذاكرةً أعمق من ذاكرة سكانها. في هذه المذكرة، أعود إلى أماكن تغيّرت ملامحها لكن بقيت أصداؤها في الروح.
+              </p>
+              <span class="tag">مذكرات</span>
+            </div>
+          </a>
+
+          <!-- Article 2 -->
+          <a href="article.html" class="article-card animate-on-scroll" data-word-count="900">
+            <div class="article-card__thumbnail">
+              <img src="https://images.unsplash.com/photo-1516414447565-b14be0adf13e?w=300&h=300&fit=crop" alt="ليل">
+            </div>
+            <div class="article-card__content">
+              <h3 class="article-card__title">عن الليالي التي لا ننام فيها: تأملات في الأرق الإبداعي</h3>
+              <div class="article-card__meta">
+                <span class="author-name">أحمد الكاتب</span>
+                <span class="article-card__meta-separator">/</span>
+                <span class="article-date">٥ مارس ٢٠٢٦</span>
+                <span class="article-card__meta-separator">/</span>
+                <span class="reading-time-badge">
+                  <span class="card-reading-time">٥ دقائق</span>
+                </span>
+              </div>
+              <p class="article-card__excerpt">
+                الأرق ليس عدواً دائماً. أحياناً تكون تلك الساعات المسروقة من الليل هي الأكثر خصوبة للكتابة والتفكير العميق.
+              </p>
+              <span class="tag">تأملات</span>
+            </div>
+          </a>
+
+          <!-- Article 3 -->
+          <a href="article.html" class="article-card animate-on-scroll" data-word-count="1500">
+            <div class="article-card__thumbnail">
+              <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=300&fit=crop" alt="مكتبة">
+            </div>
+            <div class="article-card__content">
+              <h3 class="article-card__title">الكتب التي غيّرت مسار حياتي: قائمة شخصية جداً</h3>
+              <div class="article-card__meta">
+                <span class="author-name">أحمد الكاتب</span>
+                <span class="article-card__meta-separator">/</span>
+                <span class="article-date">٢٨ فبراير ٢٠٢٦</span>
+                <span class="article-card__meta-separator">/</span>
+                <span class="reading-time-badge">
+                  <span class="card-reading-time">٨ دقائق</span>
+                </span>
+              </div>
+              <p class="article-card__excerpt">
+                ليست كل الكتب متساوية. بعضها يمرّ عابراً، وبعضها يحفر في الذاكرة أخاديد لا تُمحى. هذه قائمتي الشخصية للكتب التي أعادت تشكيل نظرتي للعالم.
+              </p>
+              <span class="tag">مراجعات</span>
+            </div>
+          </a>
+
+          <!-- Article 4 -->
+          <a href="article.html" class="article-card animate-on-scroll" data-word-count="800">
+            <div class="article-card__thumbnail">
+              <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&h=300&fit=crop" alt="كتابة يدوية">
+            </div>
+            <div class="article-card__content">
+              <h3 class="article-card__title">لماذا عدتُ للكتابة بخط اليد في عصر لوحة المفاتيح</h3>
+              <div class="article-card__meta">
+                <span class="author-name">أحمد الكاتب</span>
+                <span class="article-card__meta-separator">/</span>
+                <span class="article-date">٢٠ فبراير ٢٠٢٦</span>
+                <span class="article-card__meta-separator">/</span>
+                <span class="reading-time-badge">
+                  <span class="card-reading-time">٤ دقائق</span>
+                </span>
+              </div>
+              <p class="article-card__excerpt">
+                في تجربة دامت ثلاثة أشهر، استبدلتُ لوحة المفاتيح بالقلم والورقة. النتيجة كانت مفاجئة: أفكار أعمق، وتركيز أصفى، وعلاقة جديدة مع الكلمات.
+              </p>
+              <span class="tag">تجارب</span>
+            </div>
+          </a>
         </div>
 
-        <div class="grid grid--cols-2">
-          <!-- Article Card 1 -->
-          <article class="card article-card">
-            <div class="card__body">
-              <div class="article-card__meta">
-                <a href="archive.html" class="article-card__category">تأملات</a>
-                <span class="article-card__reading-time">
-                  <svg class="icon icon--sm" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12,6 12,12 16,14"/>
-                  </svg>
-                  5 دقائق
-                </span>
-              </div>
-              <h3 class="card__title">
-                <a href="article.html">تأملات في صباح الربيع</a>
-              </h3>
-              <p class="card__excerpt">
-                هناك شيء خاص في صباحات الربيع، عندما تتناثر أشعة الشمس بين الأوراق الخضراء...
-                في هذا المقال أتأمل في جمال اللحظة PRESENT وكيف يمكننا استغلالها لتطوير الذات.
-              </p>
-              <div class="card__footer">
-                <time datetime="2024-01-15">15 يناير 2024</time>
-                <a href="article.html" class="article-card__link">
-                  اقرأ المزيد
-                  <svg class="icon icon--sm" viewBox="0 0 24 24">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12,5 19,12 12,19"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article Card 2 -->
-          <article class="card article-card">
-            <div class="card__body">
-              <div class="article-card__meta">
-                <a href="archive.html" class="article-card__category">برمجة</a>
-                <span class="article-card__reading-time">
-                  <svg class="icon icon--sm" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12,6 12,12 16,14"/>
-                  </svg>
-                  8 دقائق
-                </span>
-              </div>
-              <h3 class="card__title">
-                <a href="article.html">كيف بدأت رحلتي في البرمجة</a>
-              </h3>
-              <p class="card__excerpt">
-                بدأت رحلتي مع البرمجة منذ خمس سنوات، كانت البداية صعبة مليئة بالتحديات والأخطاء...
-                في هذا المقال أشارككم تجربتي وأهم الدروس التي تعلمتها lungo questa strada.
-              </p>
-              <div class="card__footer">
-                <time datetime="2024-01-10">10 يناير 2024</time>
-                <a href="article.html" class="article-card__link">
-                  اقرأ المزيد
-                  <svg class="icon icon--sm" viewBox="0 0 24 24">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12,5 19,12 12,19"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article Card 3 -->
-          <article class="card article-card">
-            <div class="card__body">
-              <div class="article-card__meta">
-                <a href="archive.html" class="article-card__category">قراءة</a>
-                <span class="article-card__reading-time">
-                  <svg class="icon icon--sm" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12,6 12,12 16,14"/>
-                  </svg>
-                  6 دقائق
-                </span>
-              </div>
-              <h3 class="card__title">
-                <a href="article.html">أفضل الكتب التي قرأتها هذا العام</a>
-              </h3>
-              <p class="card__excerpt">
-                لكل كتاب قصة، وكل صفحة تحمل في طياتها عالماً جديداً من المعرفة...
-                في هذا المقال أشارككم список بأفضل الكتب التي قرأتها هذا العام وتأثيرها على حياتي.
-              </p>
-              <div class="card__footer">
-                <time datetime="2024-01-05">5 يناير 2024</time>
-                <a href="article.html" class="article-card__link">
-                  اقرأ المزيد
-                  <svg class="icon icon--sm" viewBox="0 0 24 24">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12,5 19,12 12,19"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Article Card 4 -->
-          <article class="card article-card">
-            <div class="card__body">
-              <div class="article-card__meta">
-                <a href="archive.html" class="article-card__-category">تطوير ذات</a>
-                <span class="article-card__reading-time">
-                  <svg class="icon icon--sm" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12,6 12,12 16,14"/>
-                  </svg>
-                  7 دقائق
-                </span>
-              </div>
-              <h3 class="card__title">
-                <a href="article.html">مهارات التواصل الفعّال</a>
-              </h3>
-              <p class="card__excerpt">
-                التواصل فن يتطلب مهارة، وكثيراً ما نجد صعوبة في التعبير عن أفكارنا بوضوح...
-                في هذا المقال نتحدث عن أهم مهارات التواصل الفعّال وكيفية تطويرها في الحياة اليومية.
-              </p>
-              <div class="card__footer">
-                <time datetime="2024-01-01">1 يناير 2024</time>
-                <a href="article.html" class="article-card__link">
-                  اقرأ المزيد
-                  <svg class="icon icon--sm" viewBox="0 0 24 24">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12,5 19,12 12,19"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </article>
+        <!-- Load More -->
+        <div style="text-align: center; margin-top: var(--space-2xl);">
+          <a href="archive.html" class="btn btn--outline">تصفّح جميع المقالات</a>
         </div>
+      </div>
+    </section>
 
-        <div style="text-align: center; margin-top: var(--spacing-8);">
-          <a href="archive.html" class="btn btn--secondary">عرض جميع المقالات</a>
+    <!-- Newsletter Section -->
+    <section class="section">
+      <div class="container">
+        <hr class="divider">
+        <div class="newsletter">
+          <div class="newsletter__avatars">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1rem; border: 3px solid var(--bg-primary);">📖</div>
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-tag); display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-right: -10px; border: 3px solid var(--bg-primary);">✍️</div>
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-right: -10px; border: 3px solid var(--bg-primary);">📚</div>
+            <span class="newsletter__count" style="margin-right: var(--space-sm);">+١٢٠ قارئ</span>
+          </div>
+          <h3 class="newsletter__title">احصل على أحدث المقالات والمذكرات<br>مباشرة في بريدك.</h3>
+          <form class="newsletter__form" onsubmit="event.preventDefault(); alert('شكراً لاشتراكك!');">
+            <input type="email" class="newsletter__input" placeholder="بريدك الإلكتروني" required>
+            <button type="submit" class="newsletter__submit">اشترك</button>
+          </form>
+          <p class="newsletter__note">بدون إزعاج — محتوى قيّم فقط.</p>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- ════════ Footer ════════ -->
   <footer class="footer">
     <div class="container">
-      <div class="footer__content">
-        <div class="footer__brand">
-          <span class="footer__logo">مدونتي</span>
-          <p class="footer__description">
-            مدونة شخصية أشارك فيها أفكاري ومذكراتي حول البرمارة والقراءة وتطوير الذات.
-          </p>
+      <div class="footer__inner">
+        <div class="footer__top">
+          <div class="footer__brand">
+            <a href="index.html" class="footer__logo">١٨٨٨</a>
+            <p class="footer__description">
+              مدوّنة شخصية بسيطة وأنيقة، صُمّمت بعناية لتجربة قراءة مريحة وممتعة.
+            </p>
+          </div>
+          <div class="footer__columns">
+            <div>
+              <h4 class="footer__column-title">الصفحات</h4>
+              <div class="footer__column-links">
+                <a href="index.html" class="footer__column-link">الرئيسية</a>
+                <a href="archive.html" class="footer__column-link">الأرشيف</a>
+                <a href="about.html" class="footer__column-link">عن الكاتب</a>
+              </div>
+            </div>
+            <div>
+              <h4 class="footer__column-title">روابط</h4>
+              <div class="footer__column-links">
+                <a href="#" class="footer__column-link">تويتر</a>
+                <a href="#" class="footer__column-link">إنستغرام</a>
+                <a href="#" class="footer__column-link">RSS</a>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div class="footer__section">
-          <h4 class="footer__title">روابط سريعة</h4>
-          <ul class="footer__links">
-            <li><a href="index.html" class="footer__link">الرئيسية</a></li>
-            <li><a href="archive.html" class="footer__link">المقالات</a></li>
-            <li><a href="about.html" class="footer__link">من أنا</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer__section">
-          <h4 class="footer__title">التواصل</h4>
-          <ul class="footer__links">
-            <li><a href="#" class="footer__link">Twitter</a></li>
-            <li><a href="#" class="footer__link">GitHub</a></li>
-            <li><a href="#" class="footer__link">LinkedIn</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="footer__bottom">
-        <p class="footer__copyright">
-          © <span data-current-year>2024</span> مدونتي. جميع الحقوق محفوظة.
-        </p>
-        <div class="footer__social">
-          <a href="#" class="footer__social-link" aria-label="Twitter">
-            <svg class="icon icon--sm" viewBox="0 0 24 24">
-              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-            </svg>
-          </a>
-          <a href="#" class="footer__social-link" aria-label="GitHub">
-            <svg class="icon icon--sm" viewBox="0 0 24 24">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-            </svg>
-          </a>
-          <a href="#" class="footer__social-link" aria-label="LinkedIn">
-            <svg class="icon icon--sm" viewBox="0 0 24 24">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-              <rect x="2" y="9" width="4" height="12"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-          </a>
+
+        <div class="footer__bottom">
+          <p class="footer__copyright">© ٢٠٢٦ مدوّنة ١٨٨٨ — جميع الحقوق محفوظة</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social-link" aria-label="تويتر">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="RSS">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- JavaScript Files -->
+  <!-- ════════ Back to Top ════════ -->
+  <button class="back-to-top" id="back-to-top" aria-label="العودة لأعلى">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- JS -->
   <script src="js/reading.js"></script>
   <script src="js/app.js"></script>
 </body>
