@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="مدونة شخصية لمقالات ومذكرات في البرمجة والقراءة وتطوير الذات">
+  <meta name="author" content="الكاتب">
+  <title>مدونتي - مقالات ومذكرات</title>
+  
+  <!-- Google Fonts - IBM Plex Arabic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
+  
+  <!-- Theme JS (in head to prevent flash) -->
+  <script src="js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar__container">
+      <a href="index.html" class="navbar__logo">مدونتي</a>
+      
+      <nav class="navbar__nav">
+        <ul class="navbar__links">
+          <li><a href="index.html" class="navbar__link navbar__link--active">الرئيسية</a></li>
+          <li><a href="archive.html" class="navbar__link">المقالات</a></li>
+          <li><a href="about.html" class="navbar__link">من أنا</a></li>
+        </ul>
+        
+        <div class="navbar__actions">
+          <button class="btn btn--icon btn--ghost" data-theme-toggle aria-label="تبديل الثيم">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
+      
+      <button class="navbar__toggle" aria-label="فتح القائمة" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero__decoration"></div>
+      <div class="container">
+        <div class="two-col">
+          <div class="hero__content">
+            <h1 class="hero__title">
+              مرحباً بك في <span class="hero__title--gradient">مدونتي</span>
+            </h1>
+            <p class="hero__subtitle">
+              هنا أكتب أفكاري ومذكراتي حول البرمجة والقراءة وتطوير الذات. 
+              شاركني رحلتك في عالم التقنية والمعرفة.
+            </p>
+            <div class="hero__actions">
+              <a href="#latest-articles" class="btn btn--primary btn--lg">ابدأ القراءة</a>
+              <a href="about.html" class="btn btn--secondary btn--lg">من أنا</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="grid grid--cols-3" style="max-width: 800px; margin: 0 auto;">
+          <div class="card stats-card">
+            <div class="stats-card__number">12</div>
+            <div class="stats-card__label">مقال</div>
+          </div>
+          <div class="card stats-card">
+            <div class="stats-card__number">5</div>
+            <div class="stats-card__label">تصنيف</div>
+          </div>
+          <div class="card stats-card">
+            <div class="stats-card__number">3</div>
+            <div class="stats-card__label">أشهر</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Articles -->
+    <section class="section" id="latest-articles">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-header__title">أحدث المقالات</h2>
+          <p class="section-header__subtitle">استكشف أحدث المقالات والمذكرات</p>
+        </div>
+
+        <div class="grid grid--cols-2">
+          <!-- Article Card 1 -->
+          <article class="card article-card">
+            <div class="card__body">
+              <div class="article-card__meta">
+                <a href="archive.html" class="article-card__category">تأملات</a>
+                <span class="article-card__reading-time">
+                  <svg class="icon icon--sm" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12,6 12,12 16,14"/>
+                  </svg>
+                  5 دقائق
+                </span>
+              </div>
+              <h3 class="card__title">
+                <a href="article.html">تأملات في صباح الربيع</a>
+              </h3>
+              <p class="card__excerpt">
+                هناك شيء خاص في صباحات الربيع، عندما تتناثر أشعة الشمس بين الأوراق الخضراء...
+                في هذا المقال أتأمل في جمال اللحظة PRESENT وكيف يمكننا استغلالها لتطوير الذات.
+              </p>
+              <div class="card__footer">
+                <time datetime="2024-01-15">15 يناير 2024</time>
+                <a href="article.html" class="article-card__link">
+                  اقرأ المزيد
+                  <svg class="icon icon--sm" viewBox="0 0 24 24">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12,5 19,12 12,19"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article Card 2 -->
+          <article class="card article-card">
+            <div class="card__body">
+              <div class="article-card__meta">
+                <a href="archive.html" class="article-card__category">برمجة</a>
+                <span class="article-card__reading-time">
+                  <svg class="icon icon--sm" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12,6 12,12 16,14"/>
+                  </svg>
+                  8 دقائق
+                </span>
+              </div>
+              <h3 class="card__title">
+                <a href="article.html">كيف بدأت رحلتي في البرمجة</a>
+              </h3>
+              <p class="card__excerpt">
+                بدأت رحلتي مع البرمجة منذ خمس سنوات، كانت البداية صعبة مليئة بالتحديات والأخطاء...
+                في هذا المقال أشارككم تجربتي وأهم الدروس التي تعلمتها lungo questa strada.
+              </p>
+              <div class="card__footer">
+                <time datetime="2024-01-10">10 يناير 2024</time>
+                <a href="article.html" class="article-card__link">
+                  اقرأ المزيد
+                  <svg class="icon icon--sm" viewBox="0 0 24 24">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12,5 19,12 12,19"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article Card 3 -->
+          <article class="card article-card">
+            <div class="card__body">
+              <div class="article-card__meta">
+                <a href="archive.html" class="article-card__category">قراءة</a>
+                <span class="article-card__reading-time">
+                  <svg class="icon icon--sm" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12,6 12,12 16,14"/>
+                  </svg>
+                  6 دقائق
+                </span>
+              </div>
+              <h3 class="card__title">
+                <a href="article.html">أفضل الكتب التي قرأتها هذا العام</a>
+              </h3>
+              <p class="card__excerpt">
+                لكل كتاب قصة، وكل صفحة تحمل في طياتها عالماً جديداً من المعرفة...
+                في هذا المقال أشارككم список بأفضل الكتب التي قرأتها هذا العام وتأثيرها على حياتي.
+              </p>
+              <div class="card__footer">
+                <time datetime="2024-01-05">5 يناير 2024</time>
+                <a href="article.html" class="article-card__link">
+                  اقرأ المزيد
+                  <svg class="icon icon--sm" viewBox="0 0 24 24">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12,5 19,12 12,19"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article Card 4 -->
+          <article class="card article-card">
+            <div class="card__body">
+              <div class="article-card__meta">
+                <a href="archive.html" class="article-card__-category">تطوير ذات</a>
+                <span class="article-card__reading-time">
+                  <svg class="icon icon--sm" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12,6 12,12 16,14"/>
+                  </svg>
+                  7 دقائق
+                </span>
+              </div>
+              <h3 class="card__title">
+                <a href="article.html">مهارات التواصل الفعّال</a>
+              </h3>
+              <p class="card__excerpt">
+                التواصل فن يتطلب مهارة، وكثيراً ما نجد صعوبة في التعبير عن أفكارنا بوضوح...
+                في هذا المقال نتحدث عن أهم مهارات التواصل الفعّال وكيفية تطويرها في الحياة اليومية.
+              </p>
+              <div class="card__footer">
+                <time datetime="2024-01-01">1 يناير 2024</time>
+                <a href="article.html" class="article-card__link">
+                  اقرأ المزيد
+                  <svg class="icon icon--sm" viewBox="0 0 24 24">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12,5 19,12 12,19"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--spacing-8);">
+          <a href="archive.html" class="btn btn--secondary">عرض جميع المقالات</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__content">
+        <div class="footer__brand">
+          <span class="footer__logo">مدونتي</span>
+          <p class="footer__description">
+            مدونة شخصية أشارك فيها أفكاري ومذكراتي حول البرمارة والقراءة وتطوير الذات.
+          </p>
+        </div>
+        
+        <div class="footer__section">
+          <h4 class="footer__title">روابط سريعة</h4>
+          <ul class="footer__links">
+            <li><a href="index.html" class="footer__link">الرئيسية</a></li>
+            <li><a href="archive.html" class="footer__link">المقالات</a></li>
+            <li><a href="about.html" class="footer__link">من أنا</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer__section">
+          <h4 class="footer__title">التواصل</h4>
+          <ul class="footer__links">
+            <li><a href="#" class="footer__link">Twitter</a></li>
+            <li><a href="#" class="footer__link">GitHub</a></li>
+            <li><a href="#" class="footer__link">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer__bottom">
+        <p class="footer__copyright">
+          © <span data-current-year>2024</span> مدونتي. جميع الحقوق محفوظة.
+        </p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Twitter">
+            <svg class="icon icon--sm" viewBox="0 0 24 24">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="GitHub">
+            <svg class="icon icon--sm" viewBox="0 0 24 24">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="LinkedIn">
+            <svg class="icon icon--sm" viewBox="0 0 24 24">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Files -->
+  <script src="js/reading.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
